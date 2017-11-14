@@ -4,38 +4,38 @@ void welcome_play() {
   noStroke();
   rect(-1, -1, width+1, height+1);
   textAlign(CENTER);
-  fill(0, title_opacity);
-  if (title_opacity < 255) {
-    title_opacity+=5;
+  fill(0, welcome_title_opacity);
+  if (welcome_title_opacity < 255) {
+    welcome_title_opacity+=5;
   }
   textSize(50);
   text("Lookahead Trainer", width/2, height/2-40);
   textSize(20);
-  fill(0, subtitle_opacity);
-  if (subtitle_opacity < 170) {
-    subtitle_opacity+=3;
+  fill(0, welcome_subtitle_opacity);
+  if (welcome_subtitle_opacity < 170) {
+    welcome_subtitle_opacity+=3;
   }
   text("craftincubing.blogspot.ca", width/2, height/2-20);
 
   if (mouseX>width/2-60 && mouseX<width/2+60 && mouseY > height/2 && mouseY < height/2+40) {
-    startColor = #727272;
+    welcome_button_color = #727272;
   } else {
-    startColor = color(160, start_opacity);
+    welcome_button_color = color(160, welcome_button_opacity);
   }
-  if (holdWelcome == true) {
-    startColor = #60e858;
+  if (welcome_mouse_hold == true) {
+    welcome_button_color = #60e858;
   }
-  if (start_opacity < 255) {
-    start_opacity+=3;
+  if (welcome_button_opacity < 255) {
+    welcome_button_opacity+=3;
   }
-  fill(startColor);
+  fill(welcome_button_color);
   noStroke();
   rect(width/2-60, height/2, 120, 40, 7);
   fill(255);
   text("BEGIN", width/2, height/2+28);
   pushMatrix();
   translate(width, height/2);
-  rotate(radians(cubeRotate/2));
+  rotate(radians(welcome_cube_rotate/2));
   for (int i = -1; i < 2; i++) {
     for (int j = -1; j < 2; j++) {
       stroke(0);
@@ -74,7 +74,7 @@ void welcome_play() {
 
   pushMatrix();
   translate(0, height/2);
-  rotate(radians(-cubeRotate/2));
+  rotate(radians(-welcome_cube_rotate/2));
   for (int i = -1; i < 2; i++) {
     for (int j = -1; j < 2; j++) {
       stroke(0);
@@ -113,8 +113,8 @@ void welcome_play() {
   }
   popMatrix();
 
-  cubeRotate+=rotateAccelerate;
-  if (rotateAccelerate < 1) {
-    rotateAccelerate+=0.02;
+  welcome_cube_rotate+=welcome_cube_accelerate;
+  if (welcome_cube_accelerate < 1) {
+    welcome_cube_accelerate+=0.02;
   }
 }

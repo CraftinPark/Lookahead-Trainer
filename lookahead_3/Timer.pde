@@ -6,15 +6,21 @@ boolean start; //when the user has initiated time (let go of space)
 boolean ready;  //if the user is holding the spacebar and the holding time has been surpassed
 boolean cancel;
 
+float millisStart;
+
+boolean startonce;
+
 class timer {
   timer() {
   }
   void measure() {
-    float timeAdd = millis();
+    float millisEnd = millis();
+
     textAlign(CENTER);
     if (hold == true) {
+
       timeElapse = 0;
-      timeAdd = 0;
+      millisStart = 0;
       holdTime--;
       background(#f4a641);
       if (holdTime <= 0) {
@@ -24,7 +30,11 @@ class timer {
       }
     }
     if (start == true) {
-      timeElapse = timeAdd / 1000;
+      if (startonce == false) {
+        millisStart = millis();
+        startonce = true;
+      } 
+      timeElapse = (millisEnd - millisStart) / 1000;
       if (timeElapse < 1) {
         text("Go!", width/2, height*3/5);
       }
