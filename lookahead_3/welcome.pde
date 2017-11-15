@@ -1,8 +1,24 @@
+float test;
+
 void welcome_play() {
+  textFont(font);
   fill(255);
   rectMode(CORNER);
   noStroke();
   rect(-1, -1, width+1, height+1);
+  
+
+  
+  pushMatrix();
+    textAlign(CENTER);
+  fill(0, 5);
+  translate(width/2+100, height);
+  textSize(700);
+  rotate(radians(-7));
+  text("LOOKAHEAD TRAINER LOOKAHEAD TRAINER LOOKAHEAD TRAINER LOOKAHEAD TRAINER LOOKAHEAD TRAINER", test, 0);
+  test+=0.5;
+  popMatrix();
+  
   textAlign(CENTER);
   fill(0, welcome_title_opacity);
   if (welcome_title_opacity < 255) {
@@ -16,7 +32,7 @@ void welcome_play() {
     welcome_subtitle_opacity+=3;
   }
   text("craftincubing.blogspot.ca", width/2, height/2-20);
-
+  
   if (mouseX>width/2-60 && mouseX<width/2+60 && mouseY > height/2 && mouseY < height/2+40) {
     welcome_button_color = #727272;
   } else {
@@ -31,8 +47,22 @@ void welcome_play() {
   fill(welcome_button_color);
   noStroke();
   rect(width/2-60, height/2, 120, 40, 7);
-  fill(255);
+  fill(255, welcome_button_opacity);
   text("BEGIN", width/2, height/2+28);
+  
+  fill(0,20);
+  rect(0,height-47, 220, height);
+  textFont(font2);
+  textSize(13);
+  fill(0);
+  textAlign(LEFT);
+  text("craftinpark@gmail.com", 50, height-25);
+  text("craftincubing@gmail.com", 50, height-8);
+  pushMatrix();
+  scale(0.125);
+  image(mail, 50, (height-40)*8);
+  popMatrix();
+  
   pushMatrix();
   translate(width, height/2);
   rotate(radians(welcome_cube_rotate/2));

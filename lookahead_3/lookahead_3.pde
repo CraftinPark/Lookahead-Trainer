@@ -7,13 +7,15 @@
 
 import processing.sound.*;
 SoundFile beep;
+PImage mail;
 PFont font;
+PFont font2;
 
 //-Metronome-------------------------------------------------------------------------------------------------------------------
 
 float   metronome_time;                 //Determines when the beat will play (based on framerate of 60) (subject to change)
 float   metronome_speed;                //Determines how fast the beat will play
-int   metronome_position = width/2;     //Valve setting (determines metronome speed)
+int     metronome_position = width/2;     //Valve setting (determines metronome speed)
 boolean metronome_tick;                 //Determines when the metronome has finished an interval
 int     beat_count;                     //How many times the beat has been played (resets when timer is stopped)
 
@@ -32,15 +34,14 @@ boolean mouse_hold;                     //Whether or not the mouse is being held
 
 boolean welcome_play;                   //Determines whether to play the entry screen or not
 boolean welcome_mouse_hold;             //triggers upon release of clicking start (whether or not the user is holding the entry start)
-color welcome_button_color;             //Color   of the start button
-float welcome_button_opacity = -150;    //Opacity of the start button
-color welcome_text_color;               //Color   of the text  button
-float welcome_cube_rotate = 0;          //Determines the rotation of the cube graphics
-float welcome_cube_accelerate = 0;
+color   welcome_button_color;           //Color   of the start button
+float   welcome_button_opacity = -150;  //Opacity of the start button
+color   welcome_text_color;             //Color   of the text  button
+float   welcome_cube_rotate = 0;        //Determines the rotation of the cube graphics
+float   welcome_cube_accelerate = 0;
 
-float welcome_title_opacity = -50;
-float welcome_subtitle_opacity = -100;
-
+float   welcome_title_opacity = -50;
+float   welcome_subtitle_opacity = -100;
 
 control c;
 timer t;
@@ -48,11 +49,14 @@ timer t;
 
 
 void settings() {
-  size(1000, 600);
+  size(1200, 600);
 }
 
 void setup() {
-  font = createFont("norwester", 32);
+  smooth();
+  font = createFont("norwester.otf", 32);
+  font2 = createFont("SG_Alternative_High-Alt.otf", 32);
+  mail = loadImage("mail.png");
   textFont(font);
   t = new timer();
   c = new control();
@@ -125,7 +129,6 @@ void mousePressed() {
   if (mouseX>width/2-60 && mouseX<width/2+60 && mouseY > height/2 && mouseY < height/2+40) {
     welcome_mouse_hold = true;
   }
-  saveFrame();
 }
 void mouseReleased() {
   mouse_hold = false;
