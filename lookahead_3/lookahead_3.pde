@@ -5,103 +5,75 @@
 //---------------------------------------Description: Training program for speedcubing---------------------------------------//
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-import processing.sound.*;
-SoundFile beep;
-PImage mail;
-PFont font;
-PFont font2;
+//In order to keep things organized, the order of attributes is as follows:
 
-//-Metronome-------------------------------------------------------------------------------------------------------------------
-
-float   metronome_time;                 //Determines when the beat will play (based on framerate of 60) (subject to change)
-float   metronome_speed;                //Determines how fast the beat will play
-int     metronome_position = width/2;     //Valve setting (determines metronome speed)
-boolean metronome_tick;                 //Determines when the metronome has finished an interval
-int     beat_count;                     //How many times the beat has been played (resets when timer is stopped)
-
-//-Timer-----------------------------------------------------------------------------------------------------------------------
-
-boolean timer_stop;                     //Determines when the timer is not on (on until timer restarts)
-boolean timer_end;                      //The event at which the timer ends (on for 1 frame)
-int     timer_times = 0;                //Number of times the timer has been played
-float[] timer_record = new float[100];  //Array for recorded times
-
-//-Mouse-----------------------------------------------------------------------------------------------------------------------
-
-boolean mouse_hold;                     //Whether or not the mouse is being held (used for example metronome valve)
-
-//-Welcome---------------------------------------------------------------------------------------------------------------------
-
-boolean welcome_play;                   //Determines whether to play the entry screen or not
-boolean welcome_mouse_hold;             //triggers upon release of clicking start (whether or not the user is holding the entry start)
-color   welcome_button_color;           //Color   of the start button
-float   welcome_button_opacity = -150;  //Opacity of the start button
-color   welcome_text_color;             //Color   of the text  button
-float   welcome_cube_rotate = 0;        //Determines the rotation of the cube graphics
-float   welcome_cube_accelerate = 0;
-
-float   welcome_title_opacity = -50;
-float   welcome_subtitle_opacity = -100;
-
-control c;
-timer t;
+//TEXT: font, align, size
 
 
+//=Settings===================================================================================================================
 
 void settings() {
   size(1200, 600);
 }
 
+//=Setup======================================================================================================================
+
 void setup() {
   smooth();
-  font = createFont("norwester.otf", 32);
+
+  //-Imports--------------------------------------------------------------------------------------------------------------------
+
+  norwester = createFont("norwester.otf", 32);
   font2 = createFont("SG_Alternative_High-Alt.otf", 32);
   mail = loadImage("mail.png");
-  textFont(font);
+  //  beep = new SoundFile(this, "beep.mp3");
+
+  //-Obects---------------------------------------------------------------------------------------------------------------------
+
   t = new timer();
   c = new control();
-  //  beep = new SoundFile(this, "beep.mp3");
+
+  //----------------------------------------------------------------------------------------------------------------------------
+
   for (int i = 0; i < timer_record.length; i++) {
     timer_record[i] = i;
   }
 }
 
 void draw() {  
-
-
   background(120);
-  rectMode(CORNER);
-  noFill();
-  stroke(80);
-  for (int i = 0; i < timer_times; i++) {
+
+  t.measure();
+  c.display();
+
+  //-Time record----------------------------------------------------------
+
+  for (int i = 0; i < timer_times; i++) {  //Expand down as many times as there are timer_times
     timer_record[timer_times] = timeElapse;     
-    for (int j = 0; j < 3; j++) {
-      if (mouseX > 20+j*7 && mouseX < 90+j*70) {
-        fill(0);
+    for (int j = 0; j < 3; j++) {  //Three columns for AV5 and AV12 values (not yet used)
+      if (mouseX > 20+j*70 && mouseX < 90+j*70 && mouseY > 250+(i*38) && mouseY < 288 + (i*38)) {  //highlighting (later use for menu bar for individual time)
+        fill(150);
+      } else {
+        noFill();
       }
+      stroke(80);
+      strokeWeight(4);
+      rectMode(CORNER);
       rect(20+j*70, 250+(i*38), 70, 38);
     }
-    textAlign(LEFT);
+    fill(255);
+    textFont(norwester);
+    textAlign(CENTER);
     textSize(20);
-    text(timer_record[i], 20, 275+i*38);
+    text(timer_record[i], 53, 275+i*38);
   }
-  textSize(50);
 
-  if (timer_stop == true) {
-    startonce = false;
-    if (timer_end == false) {
-      timer_times++;
-      timer_end = true;
-    }
-  } else { 
-    timer_end = false;
-  }
-  t.measure();
   fill(255);
+  textFont(font2);
   textAlign(CENTER);
   textSize(30);
   text("Lookahead Trainer", width/2, 30);
-  c.display();
+
 
   if (ready == true || start == true) {
     if (metronome_tick == true) {    

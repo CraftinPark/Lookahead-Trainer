@@ -9,6 +9,8 @@ class control {
     fill(0);
     rect(95, 100, 810, 20);
     stroke(0);
+    strokeWeight(2);
+    textFont(font2);
     for (int h = 1; h < 10; h++) {
       text(h*20+40, h*100, 75);
       line(h*100, 95, h*100, 125);

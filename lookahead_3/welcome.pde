@@ -1,7 +1,7 @@
 float test;
 
 void welcome_play() {
-  textFont(font);
+  textFont(norwester);
   fill(255);
   rectMode(CORNER);
   noStroke();

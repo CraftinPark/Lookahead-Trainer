@@ -15,7 +15,8 @@ class timer {
   }
   void measure() {
     float millisEnd = millis();
-
+    strokeWeight(0); 
+    textFont(font2);
     textAlign(CENTER);
     if (hold == true) {
 
@@ -40,6 +41,16 @@ class timer {
       }
     }
     text(timeElapse, width/2, height/2);
+
+    if (timer_stop == true) {  //increase timer_times when the timer has stopped
+      startonce = false;
+      if (timer_end == false) {
+        timer_times++;
+        timer_end = true;
+      }
+    } else { 
+      timer_end = false;
+    }
   }
 }
 
