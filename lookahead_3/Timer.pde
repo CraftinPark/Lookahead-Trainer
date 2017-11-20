@@ -11,36 +11,42 @@ float millisStart;
 boolean startonce;
 
 class timer {
+  
   timer() {
   }
+  
   void measure() {
     float millisEnd = millis();
     strokeWeight(0); 
     textFont(font2);
     textAlign(CENTER);
     if (hold == true) {
-
+      opac += 20;
       timeElapse = 0;
       millisStart = 0;
       holdTime--;
-      background(#f4a641);
+      background(#f4a641); 
       if (holdTime <= 0) {
         background(#5ff442);
         ready = true;
-        text("ready", width/2, height*3/5);
+        text("ready", width/2, height*3/5 + 50);
       }
+    } else {
+    opac = 0;
     }
     if (start == true) {
+      background(180);
       if (startonce == false) {
         millisStart = millis();
         startonce = true;
       } 
       timeElapse = (millisEnd - millisStart) / 1000;
       if (timeElapse < 1) {
-        text("Go!", width/2, height*3/5);
+        text("Go!", width/2, height*3/5+ 50);
       }
     }
-    text(timeElapse, width/2, height/2);
+    textSize(150);
+    text(timeElapse, width/2, height/2+ 50);
 
     if (timer_stop == true) {  //increase timer_times when the timer has stopped
       startonce = false;
@@ -50,32 +56,6 @@ class timer {
       }
     } else { 
       timer_end = false;
-    }
-  }
-}
-
-void keyPressed() {
-  if (key == ' ') {
-    if (start == false) {
-      hold = true;
-    } else {
-    }
-  }
-}
-
-void keyReleased() {
-  if (key == ' ') {
-    hold = false;
-    holdTime = 30;
-    if (ready == true && cancel == false) {
-      ready = false;
-      start = true;
-      timer_stop = false;
-      println("start");
-    } else {
-      timer_stop = true;
-      start = false;
-      background(#f4a641);
     }
   }
 }

@@ -5,12 +5,13 @@ SoundFile beep;
 PImage mail;
 PFont norwester;
 PFont font2;
+PFont numberfont;
 
 //-Metronome-------------------------------------------------------------------------------------------------------------------
 
 float   metronome_time;                 //Determines when the beat will play (based on framerate of 60) (subject to change)
 float   metronome_speed;                //Determines how fast the beat will play
-int     metronome_position = width/2;   //Valve setting (determines metronome speed)
+int     metronome_position = 84;   //Valve setting (determines metronome speed)
 boolean metronome_tick;                 //Determines when the metronome has finished an interval
 int     beat_count;                     //How many times the beat has been played (resets when timer is stopped)
 
@@ -41,3 +42,9 @@ float   welcome_subtitle_opacity = -100;
 
 control c;
 timer t;
+
+float pullup;
+float pullup_accel = 7.5;
+boolean pulled;
+
+float opac = 0;

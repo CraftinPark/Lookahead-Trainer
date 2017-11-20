@@ -44,7 +44,7 @@ void welcome_play() {
   if (welcome_button_opacity < 255) {
     welcome_button_opacity+=3;
   }
-  fill(welcome_button_color);
+  fill(welcome_button_color, welcome_button_opacity);
   noStroke();
   rect(width/2-60, height/2, 120, 40, 7);
   fill(255, welcome_button_opacity);
